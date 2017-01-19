@@ -1,19 +1,95 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Examples</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link href="" rel="stylesheet">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>easyui文档</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link rel="stylesheet" href="themes/default/easyui.css">
+	<script src="jquery.min.js"></script>
+	<script src="jquery.easyui.min.js"></script>
+	<script type="text/javascript">
+	var centerTabs;
+	
+	$(function() {
+		if(top.location != self.location) {
+			top.location = self.location;
+		}
+		centerTabs = $('#centerTabs').tabs({
+			border : false,
+			fit : true
+		});
+		
+		var tree = $('#menuTree').tree({
+			url : 'menu.json',
+			animate : false,
+			lines : true,
+			onClick : function(node) {
+				if (node.attributes && node.attributes.url && node.attributes.url != '' && node.attributes.url!='#') {
+					var href;
+					if (/^\//.test(node.attributes.url)) {/*以"/"符号开头的,说明是本项目地址*/
+						href = node.attributes.url.substr(1);
+						//$.messager.progress({
+						//	text : '请求数据中....',
+						//	interval : 100
+						//});
+					} else {
+						href = node.attributes.url;
+					}
+					addTabFun({
+						src : href,
+						title : node.text
+					});
+				} else {
+					
+				}
+			},
+			onLoadSuccess : function(node, data) {
+				var t = $(this);
+				if (data) {
+					$(data).each(function(index, d) {
+						if (this.state == 'closed') {
+							t.tree('expandAll');
+						}
+					});
+				}
+			}
+		});
+
+	});
+	//tab动态加载页面
+	function addTabFun(opts) {
+		var options = $.extend({
+			title : '',
+			content : '<iframe src="' + opts.src + '" frameborder="0" style="border:0;width:100%;height:99.2%;"></iframe>',
+			closable : true,
+			iconCls : ''
+		}, opts);
+		if (centerTabs.tabs('exists', options.title)) {
+			centerTabs.tabs('close', options.title);
+		}
+		centerTabs.tabs('add', options);
+	};
+	
+	
+</script>
 </head>
-
-<body>
-	<ul>
-		<li><a href="demo/datagrid/basic.html">继承</a></li>
-	</ul>
-</body>
-
+<body class="easyui-layout">
+	<!-- 头部-->   
+   <!--  <div data-options="region:'north',title:'',split:true" style="height:100px;"></div --> 
+     <!-- 左边-->
+    <div data-options="region:'west',title:'系统菜单',split:true" style="width:250px;">
+		<ul class="easyui-tree" data-options="animate:true,lines:true" id="menuTree">
+		</ul>
+    </div> 
+    <!-- 中间部分-->  
+    <div data-options="region:'center',title:''" style="padding:5px;background:#eee;">
+    	<div class="easyui-tabs" id="centerTabs" style="width:700px;height:600px">
+			<div title="About" style="padding:10px">
+				<h1 style="margin:200px 0 0 200px; font-size:60px;">easyui文档界面</h1>
+			</div>
+		</div>
+    </div>   
+</body> 
 </html>
