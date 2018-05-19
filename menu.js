@@ -7,11 +7,11 @@
         "id": 2,
         "parendId": 1,
         "state": "open",
-        "text": "基础手风琴",
+        "text": "列表分页多选",
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/basic.html"
+            "url": "examples/chooseMultiple.html"
         }
     }, {
         "id": 3,
@@ -21,7 +21,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/fluid.html"
+            "url": ""
         }
     }, {
         "id": 3,
@@ -31,7 +31,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/ajax.html"
+            "url": ""
         }
     }, {
         "id": 3,
@@ -41,7 +41,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/actions.html"
+            "url": ""
         }
     }, {
         "id": 3,
@@ -51,7 +51,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/tools.html"
+            "url": ""
         }
     }, {
         "id": 3,
@@ -61,7 +61,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/expandable.html"
+            "url": ""
         }
     }, {
         "id": 3,
@@ -71,7 +71,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "demo/accordion/multiple.html"
+            "url": ""
         }
     }],
     "checked": false,
@@ -91,7 +91,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "system/listchoose.html"
+            "url": ""
         }
     }, {
         "id": 548,
@@ -101,7 +101,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "advertise/index/list"
+            "url": ""
         }
     }, {
         "id": 549,
@@ -111,7 +111,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "tbInformationCata/index/list"
+            "url": ""
         }
     }, {
         "id": 550,
@@ -121,7 +121,7 @@
         "children": null,
         "checked": false,
         "attributes": {
-            "url": "tbInformation/index/list"
+            "url": ""
         }
     }],
     "checked": false,

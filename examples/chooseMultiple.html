@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>列表分页多选</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link rel="stylesheet" type="text/css" href="/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/themes/icon.css">
+    <script type="text/javascript" src="/jquery.min.js"></script>
+    <script type="text/javascript" src="/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="template.js"></script>
+    <script type="text/javascript" src="common.js"></script>
+</head>
+
+<body>
+    <table id="dg-list"></table>
+    <button onclick="moreseleList.showData('homeTemp','contentWrap')">显示所有数据</button>
+    <table id="contentWrap"></table>
+    <!--首页广告位-->
+    <script id="homeTemp" type="text/html">
+        {{each items as item i}}
+        <tr>
+        	<td>{{item.agentAreaCity}}</td>
+        	<td>{{item.agentAreaCityName}}</td>
+        </tr>
+        {{/each}}
+    </script>
+    <script>
+    $(function() {
+        //列表
+        $("#dg-list").datagrid({
+            url: 'list.json',
+            method: 'post',
+            fitColumns: true,
+            rownumbers: true,
+            nowrap: true, //当数据长度超出列宽时将会自动截取
+            //idField:'userid',//id字段
+            //sortName:'userid',//当数据表格初始化时以哪一列来排序
+            //sortOrder:'desc',//'asc'/'desc'（正序/倒序）
+            //remoteSort: false,//定义是否通过远程服务器对数据排序
+            resizable: false,
+            checkOnSelect: false,
+            pagination: true,
+            pageSize: 10,
+            columns: [
+                [
+                    { field: 'pid', checkbox: true },
+                    { field: 'agentAreaCity', align: 'center', width: "30%", title: '角色名称' },
+                    { field: 'agentAreaCityName', align: 'center', width: "30%", title: '角色描述' }
+                ]
+            ],
+            queryParams: eb.form2Json("search-ff"),
+            loadFilter: function(data) {
+                return eb.loadFilter(data); //自定义过滤方法
+            },
+            onLoadSuccess:function(data){
+			  moreseleList.initCheckData(data);	
+	        },
+            onCheck: function(rowIndex, rowData) {
+                moreseleList.itemCheck(rowData, 'add');
+            },
+            onUncheck: function(rowIndex, rowData) {
+                moreseleList.itemCheck(rowData, 'dele');
+            },
+            onSelectAll: function(rowData) {
+                moreseleList.itemCheck(rowData, 'add');
+            },
+            onUnselectAll: function(rowData) {
+                moreseleList.itemCheck(rowData, 'dele');
+            }
+        });
+        //初始化分页多选
+        moreseleList.init('domain_id', '#dg-list', {});
+
+
+
+    });
+    </script>
+</body>
+
+</html>
